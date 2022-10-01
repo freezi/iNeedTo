@@ -3,7 +3,7 @@ import { FaTimes } from "react-icons/fa";
 const Task = ({ task, onDeleteClick, onToggle }) => {
   return (
     <div
-      className={`flex flex-col justify-between px-8 py-4 mb-2 border shadow select-none ${
+      className={`flex flex-col justify-between px-8 py-4 my-1 border shadow select-none ${
         task.complete ? "line-through opacity-50" : ""
       }`}
       onDoubleClick={() => onToggle(task.id)}
