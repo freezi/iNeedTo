@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import TaskHeader from "./TaskList/TaskHeader";
-import Tasks from "./TaskList/Tasks";
+import TaskContainer from "./TaskList/TaskContainer";
 import NewTaskModal from "./TaskList/NewTaskModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -44,9 +44,12 @@ const TaskList = () => {
 
   const toggleStatus = (id) => {
     setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, complete: !task.complete } : task
-      )
+      tasks.map((task) => {
+        if (task.id === id && !task.complete) {
+          toast.success("Task completed!");
+        }
+        return task.id === id ? { ...task, complete: !task.complete } : task;
+      })
     );
   };
 
@@ -67,7 +70,7 @@ const TaskList = () => {
         onAddInputChange={handleAddInputChange}
         onAddFormSubmit={handleAddFormSubmit}
       />
-      <Tasks
+      <TaskContainer
         tasks={tasks}
         onDeleteClick={handleDeleteClick}
         onToggle={toggleStatus}
